@@ -1,4 +1,4 @@
-console.log("🔍 MONGODB_URI from .env:", process.env.MONGODB_URI);
+console.log("MONGODB_URI from .env:", process.env.MONGODB_URI);
 
 import mongoose from "mongoose";
 import { DB_NAME } from "../constants.js";
