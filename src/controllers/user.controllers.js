@@ -26,7 +26,7 @@ const registerUser = asyncHandler (async (req,res) => {
         throw new ApiError(400, "All fields are required")
     }
 
-    User.findOne({
+   const existedUser = await User.findOne({
         $or: [{ username },{ email }]
     })
 
@@ -48,6 +48,7 @@ const registerUser = asyncHandler (async (req,res) => {
         throw new ApiError(400, 'avatar is required')
      }
 
+
       const user = await User.create({
         fullName,
         avatar: avatar.url,
@@ -61,9 +62,12 @@ const registerUser = asyncHandler (async (req,res) => {
         "-password -refreshToken"
      )
 
+
      if(!createdUser) {
         throw new ApiError(500, "Something went wrong while rwgistering the user")
      }
+
+    
 
      return res.status(201).json(
         new ApiResponse(200, createdUser, "user Registered Successfully")
